@@ -11,7 +11,9 @@
                 <th>Content</th>
                 <th>Created</th>
                 <th>Updated</th>
+                {% if is_granted('ROLE_BLOGGER') %}
                 <th>Actions</th>
+                {% endif %}
             </tr>
         </thead>
         <tbody>
@@ -22,24 +24,24 @@
                 <td>{{ post.content }}</td>
                 <td>{% if post.created %}{{ post.created|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{% if post.updated %}{{ post.updated|date('Y-m-d H:i:s') }}{% endif %}</td>
+                {% if is_granted('ROLE_BLOGGER') %}
                 <td>
                     <ul>
                         <li>
                             <a href="{{ path('post_show', { 'id': post.id }) }}">show</a>
                         </li>
-                        {% if is_granted('ROLE_USER') %}
                         <li>
                             <a href="{{ path('post_edit', { 'id': post.id }) }}">edit</a>
                         </li>
-                        {% endif %}
                     </ul>
                 </td>
+                {% endif %}
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    {% if is_granted('ROLE_USER') %}
+    {% if is_granted('ROLE_BLOGGER') %}
     <ul>
         <li>
             <a href="{{ path('post_new') }}">Create a new entry</a>

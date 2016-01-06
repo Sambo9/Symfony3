@@ -9,9 +9,7 @@ class SessionController extends Controller
 {
     public function loginAction(Request $request)
     {
-      if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-        return $this->redirectToRoute('index');
-      }
+      
           $authenticationUtils = $this->get('security.authentication_utils');
 
         // get the login error if there is one

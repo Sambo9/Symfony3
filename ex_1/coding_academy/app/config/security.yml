@@ -10,7 +10,7 @@ security:
 
     role_hierarchy:
        ROLE_BLOGGER:      ROLE_USER
-       ROLE_ADMIN:       [ROLE_USER, ROLE_ADMIN]
+       ROLE_ADMIN:       [ROLE_USER, ROLE_ADMIN, ROLE_BLOGGER]
     # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     providers:
         in_memory:
@@ -22,6 +22,12 @@ security:
                   admin:
                     password: '1234'
                     roles: 'ROLE_ADMIN'
+
+    access_control:
+        - { path: ^/post/(\d*)/edit, roles: ROLE_BLOGGER }
+        - { path: ^/post/new, roles: ROLE_BLOGGER }
+        - { path: ^/post/new, roles: ROLE_BLOGGER }
+        - { roles: ROLE_BLOGGER, methods: post_delete }
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs

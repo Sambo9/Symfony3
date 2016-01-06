@@ -10,11 +10,9 @@
     <body>
       {% block button %}
       {% if is_granted('ROLE_USER') %}
-        <form id="loginform" action="{{ path('logout') }}" method="POST" class="form-horizontal" role="form">
-        <input type="submit" id="btn-login" class="btn btn-success" value="logout">
+      <a href="{{ path('logout') }}"> <button id="btn-login" class="btn btn-success">Logout</button>    </a>
       {% else %}
-        <form id="loginform" action="{{ path('login') }}" method="POST" class="form-horizontal" role="form">
-        <input type="submit" id="btn-login" class="btn btn-success" value="login">
+        <a href="{{ path('login') }}"> <button id="btn-login" class="btn btn-success">Login</button>    </a>
       {% endif %}
 
       {% endblock %}

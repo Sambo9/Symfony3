@@ -36,10 +36,6 @@ class PostController extends Controller
      */
     public function newAction(Request $request)
     {
-      if (!$this->get('security.authorization_checker')->isGranted('ROLE_BLOGGER'))
-      {
-        throw $this->createAccessDeniedException();
-      }
         $post = new Post();
 
         $form = $this->createForm('CA\BlogBundle\Form\PostType', $post);
@@ -82,10 +78,6 @@ class PostController extends Controller
      */
     public function editAction(Request $request, Post $post)
     {
-      if (!$this->get('security.authorization_checker')->isGranted('ROLE_BLOGGER'))
-      {
-        throw $this->createAccessDeniedException();
-      }
         $deleteForm = $this->createDeleteForm($post);
         $editForm = $this->createForm('CA\BlogBundle\Form\PostType', $post);
         $editForm->handleRequest($request);
@@ -111,10 +103,6 @@ class PostController extends Controller
      */
     public function deleteAction(Request $request, Post $post)
     {
-      if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN'))
-      {
-        throw $this->createAccessDeniedException();
-      }
         $form = $this->createDeleteForm($post);
         $form->handleRequest($request);
 
